@@ -1,8 +1,20 @@
-$primaryColor: #605dec;
+@import "variables";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background: #fff;
+}
+
+body {
+  padding: 0 $p-sm;
+  padding-top: $p-md;
+  font-family: "Nunito Sans", sans-serif;
+
+  button {
+    border: none;
+    cursor: pointer;
+  }
 }
