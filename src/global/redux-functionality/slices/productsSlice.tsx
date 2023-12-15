@@ -56,6 +56,7 @@ export const counterSlice = createSlice({
   extraReducers(builder) {
     // Get Products
     builder.addCase(getProducts.pending, (state, action) => {
+      state.loading = true;
       state.products = [];
     });
     builder.addCase(getProducts.rejected, (state, action: any) => {
@@ -70,10 +71,11 @@ export const counterSlice = createSlice({
 
     // Search Products
     builder.addCase(searchProducts.pending, (state, action) => {
+      state.loading = true;
       state.products = [];
     });
     builder.addCase(searchProducts.rejected, (state, action: any) => {
-      state.products = [];
+      // state.products = [];
       state.loading = true;
       // TODO : ERROR MESSAGE
     });
