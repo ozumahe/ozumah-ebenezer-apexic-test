@@ -34,6 +34,13 @@ function Table({}: Props) {
                 <p className="result-count">
                   {products.length} of {10} results
                 </p>
+
+                <button
+                  onClick={() => dispatch(getProducts())}
+                  className="reset"
+                >
+                  Reset
+                </button>
               </div>
               <table>
                 <thead>
