@@ -4,6 +4,7 @@ import InitialState, {
   ProductsAction,
 } from "../../types/redux/products";
 import apiCall from "../../utils/axois";
+import { toast } from "react-toastify";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
@@ -23,7 +24,12 @@ export const searchProducts = createAsyncThunk(
       const results: Product[] = response.data?.filter((product: Product) =>
         product.product.toLowerCase().includes(searchValue.toLowerCase())
       );
-      return results;
+
+      if (results.length > 0) {
+        return results;
+      } else {
+        toast("No product found");
+      }
     } catch (error) {
       rejectWithValue({});
     }
@@ -62,7 +68,7 @@ export const counterSlice = createSlice({
     builder.addCase(getProducts.rejected, (state, action: any) => {
       state.products = [];
       state.loading = true;
-      // TODO : ERROR MESSAGE
+      toast("Wow so easy!");
     });
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.products = action.payload;
@@ -72,15 +78,13 @@ export const counterSlice = createSlice({
     // Search Products
     builder.addCase(searchProducts.pending, (state, action) => {
       state.loading = true;
-      state.products = [];
     });
     builder.addCase(searchProducts.rejected, (state, action: any) => {
-      // state.products = [];
       state.loading = true;
       // TODO : ERROR MESSAGE
     });
     builder.addCase(searchProducts.fulfilled, (state, action) => {
-      state.products = action.payload ? action.payload : [];
+      state.products = action.payload ? action.payload : state.products;
       state.loading = false;
     });
   },
