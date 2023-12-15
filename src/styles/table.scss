@@ -41,6 +41,14 @@
       font-weight: 400;
       line-height: 20px;
     }
+
+    .reset {
+      background: $primary-color;
+      padding: 5px 15px;
+      border-radius: 15px;
+      color: #fff;
+      font-size: 12px;
+    }
   }
 
   table {
