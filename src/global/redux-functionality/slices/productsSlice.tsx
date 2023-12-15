@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import InitialState, { ProductsAction } from "../../types/redux/products";
+import InitialState, {
+  Product,
+  ProductsAction,
+} from "../../types/redux/products";
 
 const initialState: InitialState = {
   isProductDetailsOpen: false,
+  selectedProduct: null,
   products: [
     {
       product: "Macbook Pro 16 inch (2020 ) For Sale",
@@ -82,8 +86,8 @@ export const counterSlice = createSlice({
   name: ProductsAction,
   initialState: initialState,
   reducers: {
-    setCounter: (state, action: PayloadAction<number>) => {
-      // state.value = action.payload;
+    setSelectedProduct: (state, action: PayloadAction<Product>) => {
+      state.selectedProduct = action.payload;
     },
     setIsProductDetailsOpen: (state, action: PayloadAction<boolean>) => {
       state.isProductDetailsOpen = action.payload;
@@ -91,5 +95,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { setIsProductDetailsOpen } = counterSlice.actions;
+export const { setIsProductDetailsOpen, setSelectedProduct } =
+  counterSlice.actions;
 export default counterSlice.reducer;

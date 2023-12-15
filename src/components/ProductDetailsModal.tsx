@@ -29,7 +29,7 @@ Modal.setAppElement("#root");
 
 function ProductDetailsModal() {
   const dispatch = useDispatch<AppDispatch>();
-  const { isProductDetailsOpen } = useSelector(
+  const { isProductDetailsOpen, selectedProduct } = useSelector(
     (state: RootState) => state.products
   );
   const { matchesAll } = useMediaQueries({
@@ -70,7 +70,7 @@ function ProductDetailsModal() {
       </div>
       <div className="container">
         <div className="header">
-          <p className="name">Macbook Pro 16 inch (2020 )</p>
+          <p className="name">{selectedProduct?.product}</p>
 
           <button onClick={handleClose}>
             <CloseIcon />

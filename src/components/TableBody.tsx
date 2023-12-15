@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../global/redux-functionality";
-import { setIsProductDetailsOpen } from "../global/redux-functionality/slices/productsSlice";
+import {
+  setIsProductDetailsOpen,
+  setSelectedProduct,
+} from "../global/redux-functionality/slices/productsSlice";
+import { Product } from "../global/types/redux/products";
 
 type Props = {};
 
@@ -9,16 +13,20 @@ function TableBody({}: Props) {
   const { products } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleProduct = () => {
+  const handleProduct = (product: Product) => {
+    dispatch(setSelectedProduct(product));
     dispatch(setIsProductDetailsOpen(true));
-
-    console.log("Clicked");
   };
 
   return (
     <tbody>
       {products.map(({ id, product, serial, quantity, total }) => (
-        <tr key={id} onClick={() => handleProduct()}>
+        <tr
+          key={id}
+          onClick={() =>
+            handleProduct({ id, product, serial, quantity, total })
+          }
+        >
           <td className="id">{id}</td>
           <td className="status">
             <div className="status-box">Status</div>

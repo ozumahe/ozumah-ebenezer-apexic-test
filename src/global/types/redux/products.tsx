@@ -8,6 +8,7 @@ export type Product = {
 interface InitialState {
   isProductDetailsOpen: boolean;
   products: Product[];
+  selectedProduct: Product | null;
 }
 const ProductsAction: string = "Products";
 
