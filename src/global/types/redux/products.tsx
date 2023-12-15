@@ -4,6 +4,7 @@ export type Product = {
   id: number;
   quantity: number;
   total: number;
+  status: "excellent" | "flawed" | "impeccable" | "defective";
 };
 interface InitialState {
   loading: boolean;

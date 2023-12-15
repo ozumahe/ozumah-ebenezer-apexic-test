@@ -24,16 +24,16 @@ function TableBody({ data }: Props) {
 
   return (
     <tbody>
-      {data.map(({ id, product, serial, quantity, total }) => (
+      {data.map(({ id, product, serial, quantity, total, status }) => (
         <tr
           key={id}
           onClick={() =>
-            handleProduct({ id, product, serial, quantity, total })
+            handleProduct({ id, product, serial, quantity, total, status })
           }
         >
           <td className="id">{id}</td>
           <td className="status">
-            <div className="status-box">Status</div>
+            <div className={`status-box ${status}`}>{status}</div>
           </td>
           <td className="quantity">{quantity}</td>
           <td className="product-name">

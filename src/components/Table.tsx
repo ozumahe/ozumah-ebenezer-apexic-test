@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../global/redux-functionality";
 import { getProducts } from "../global/redux-functionality/slices/productsSlice";
 import { SpinnerRoundOutlined } from "spinners-react";
+import { DownIcon } from "./SVGS";
 
 type Props = {};
 
@@ -30,7 +31,9 @@ function Table({}: Props) {
             <>
               <div className="table-header">
                 <p className="title">Products</p>
-                <p className="result-count">10 of {products.length} results</p>
+                <p className="result-count">
+                  {products.length} of {10} results
+                </p>
               </div>
               <table>
                 <thead>
@@ -41,7 +44,10 @@ function Table({}: Props) {
                     <th className="product-name">
                       <div>Product name</div>
                     </th>
-                    <th className="prices">Prices</th>
+                    <th className="prices">
+                      <p>Prices</p>
+                      <DownIcon />
+                    </th>
                   </tr>
                 </thead>
 
