@@ -6,6 +6,7 @@ export type Product = {
   total: number;
 };
 interface InitialState {
+  isProductDetailsOpen: boolean;
   products: Product[];
 }
 const ProductsAction: string = "Products";

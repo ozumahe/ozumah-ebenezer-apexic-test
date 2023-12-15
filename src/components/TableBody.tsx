@@ -1,16 +1,24 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../global/redux-functionality";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../global/redux-functionality";
+import { setIsProductDetailsOpen } from "../global/redux-functionality/slices/productsSlice";
 
 type Props = {};
 
 function TableBody({}: Props) {
   const { products } = useSelector((state: RootState) => state.products);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleProduct = () => {
+    dispatch(setIsProductDetailsOpen(true));
+
+    console.log("Clicked");
+  };
 
   return (
     <tbody>
       {products.map(({ id, product, serial, quantity, total }) => (
-        <tr key={id}>
+        <tr key={id} onClick={() => handleProduct()}>
           <td className="id">{id}</td>
           <td className="status">
             <div className="status-box">Status</div>
