@@ -11,13 +11,22 @@ import {
 import { useDispatch } from "react-redux";
 import { searchProducts } from "../global/redux-functionality/slices/productsSlice";
 import { AppDispatch } from "../global/redux-functionality";
+import { toast } from "react-toastify";
 
 function Nav() {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch<AppDispatch>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    const { value } = e.target;
+
+    // Check for special characters using a regular expression
+    const regex = /[!@#$%^&*(),.?":{}|<>]/;
+    if (regex.test(value)) {
+      toast("Special characters are not allowed.");
+    } else {
+      setSearchValue(value);
+    }
   };
 
   const handleSearch = () => {

@@ -68,7 +68,7 @@ export const counterSlice = createSlice({
     builder.addCase(getProducts.rejected, (state, action: any) => {
       state.products = [];
       state.loading = true;
-      toast("Wow so easy!");
+      toast("Error");
     });
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.products = action.payload;
