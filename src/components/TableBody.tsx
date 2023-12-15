@@ -1,26 +1,30 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../global/redux-functionality";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../global/redux-functionality";
 import {
   setIsProductDetailsOpen,
   setSelectedProduct,
 } from "../global/redux-functionality/slices/productsSlice";
 import { Product } from "../global/types/redux/products";
 
-type Props = {};
+type Props = {
+  data: Product[];
+};
 
-function TableBody({}: Props) {
-  const { products } = useSelector((state: RootState) => state.products);
+function TableBody({ data }: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleProduct = (product: Product) => {
+    // TO SET A PRODUCT FOR THE MODAL VIEW
     dispatch(setSelectedProduct(product));
+
+    // TO OPEN THE PRODUCT MODAL
     dispatch(setIsProductDetailsOpen(true));
   };
 
   return (
     <tbody>
-      {products.map(({ id, product, serial, quantity, total }) => (
+      {data.map(({ id, product, serial, quantity, total }) => (
         <tr
           key={id}
           onClick={() =>

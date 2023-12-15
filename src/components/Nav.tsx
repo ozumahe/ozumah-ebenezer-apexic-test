@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/nav.scss";
 import {
   Hamburger,
@@ -8,8 +8,31 @@ import {
   SettingsIcon,
   UserIcon,
 } from "./SVGS";
+import { useDispatch } from "react-redux";
+import { searchProducts } from "../global/redux-functionality/slices/productsSlice";
+import { AppDispatch } from "../global/redux-functionality";
+import { toast } from "react-toastify";
 
 function Nav() {
+  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    // Check for special characters using a regular expression
+    const regex = /[!@#$%^&*(),.?":{}|<>]/;
+    if (regex.test(value)) {
+      toast("Special characters are not allowed.");
+    } else {
+      setSearchValue(value);
+    }
+  };
+
+  const handleSearch = () => {
+    dispatch(searchProducts(searchValue));
+  };
+
   return (
     <div className="nav-container">
       <div className="left-container">
@@ -25,9 +48,15 @@ function Nav() {
             <div>
               <SearchIcon />
             </div>
-            <input type="text" placeholder="Search" />
+            <input
+              value={searchValue}
+              onChange={handleChange}
+              name="search"
+              type="text"
+              placeholder="Search"
+            />
           </div>
-          <button>Search</button>
+          <button onClick={handleSearch}>Search</button>
         </div>
         <div className="menu">
           <button>
