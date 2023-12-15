@@ -6,7 +6,9 @@ export type Product = {
   total: number;
 };
 interface InitialState {
+  loading: boolean;
   isProductDetailsOpen: boolean;
+  searchValue: string;
   products: Product[];
   selectedProduct: Product | null;
 }

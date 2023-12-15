@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/table.scss";
 import TableBody from "./TableBody";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../global/redux-functionality";
+import { getProducts } from "../global/redux-functionality/slices/productsSlice";
 
 type Props = {};
 
 function Table({}: Props) {
+  const { products } = useSelector((state: RootState) => state.products);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
   return (
     <div className="table-container">
       <div className="table-header">
         <p className="title">Products</p>
-        <p className="result-count">10 of 64 results</p>
+        <p className="result-count">10 of {products.length} results</p>
       </div>
       <table>
         <thead>
@@ -24,7 +34,7 @@ function Table({}: Props) {
           </tr>
         </thead>
 
-        <TableBody />
+        <TableBody data={products} />
       </table>
     </div>
   );
